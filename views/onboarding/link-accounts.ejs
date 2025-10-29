@@ -1,0 +1,16 @@
+<%- include('../partials/_head') %>
+<%- include('../partials/_header') %>
+<main class="container onboarding">
+  <h1>Connect Your Accounts: Your First Step to Smarter Money.</h1>
+  <p>To become your best finance buddy, I need to see your complete financial picture. Linking your bank accounts and credit cards allows me to automatically track your income and expenses.</p>
+  <div class="security">Read-Only Access • Bank-Level Security • Trusted by Millions</div>
+  <% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-error"><%= error %></div>
+  <% } %>
+  <form action="/onboarding/link-accounts" method="post">
+    <button class="btn btn-primary" type="submit">Connect My Bank</button>
+    <a href="/dashboard" class="btn btn-ghost">Skip for now</a>
+  </form>
+</main>
+<script src="/js/onboarding.js"></script>
+<%- include('../partials/_footer') %>

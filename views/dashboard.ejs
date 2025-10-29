@@ -1,0 +1,109 @@
+<%- include('partials/_head') %>
+<%- include('partials/_header') %>
+<main id="main" class="container dashboard page-enter" role="main">
+  <section class="safe-to-spend card reveal">
+    <div class="section-header">
+      <h2 class="section-title">In My Pocket Today</h2>
+      <div class="section-actions">
+        <span class="badge info"><span class="material-icons-round">calendar_month</span> Until <%= nextPayDate %></span>
+      </div>
+    </div>
+  <div class="gauge-circle" data-value="<%= safeToSpend %>" data-monthly-spend="<%= cards.spentThisMonth || 0 %>">
+      <svg viewBox="0 0 100 100" class="meter">
+        <circle class="bg" cx="50" cy="50" r="42" />
+        <circle class="fg" cx="50" cy="50" r="42" stroke-dasharray="264" stroke-dashoffset="264" />
+      </svg>
+      <div class="value" id="safeValue"><%= inr(safeToSpend) %></div>
+    </div>
+  <p>After bills, savings, and planned expenses.</p>
+    <p class="mini-breakdown">
+      <span><strong>Breakdown:</strong></span>
+      <span><%= inr((breakdown && breakdown.totalBalance) || 0) %> Balance</span>
+      <span>− <%= inr((breakdown && breakdown.totalUpcomingBills) || 0) %> Bills</span>
+      <span>− <%= inr((breakdown && breakdown.plannedSavings) || 0) %> Goals</span>
+      <span>= <strong><%= inr(safeToSpend || 0) %></strong></span>
+    </p>
+    <div class="ai-tip">
+      <% if (safeToSpend === 0 && (cards.totalBalance || 0) > 0) { %>
+        Your cash this month is fully allocated to bills and goals. Reduce bills or adjust goals to free up funds.
+      <% } else { %>
+        Good <%= (new Date()).getHours() < 12 ? 'morning' : 'day' %>! Looks like a great day for spending responsibly.
+      <% } %>
+    </div>
+  </section>
+
+  <section class="snapshot grid reveal">
+    <div class="tile">
+      <div class="icon"><span class="material-icons-round">account_balance_wallet</span></div>
+      <div class="metric">
+        <div class="value"><%= inr(cards.totalBalance || 0) %></div>
+        <div class="label">Total Balance</div>
+      </div>
+      <div class="badge good">All accounts</div>
+    </div>
+    <div class="tile">
+      <div class="icon"><span class="material-icons-round">trending_down</span></div>
+      <div class="metric">
+        <div class="value"><%= inr(cards.spentThisMonth || 0) %></div>
+        <div class="label">Spent This Month</div>
+      </div>
+      <div class="badge neutral">vs income</div>
+    </div>
+    <div class="tile">
+      <div class="icon"><span class="material-icons-round">payments</span></div>
+      <div class="metric">
+        <div class="value"><%= inr(cards.incomeThisMonth || 0) %></div>
+        <div class="label">Income This Month</div>
+      </div>
+      <% const spendVsIncome = (cards.incomeThisMonth || 0) > 0 ? Math.round((cards.spentThisMonth || 0) / (cards.incomeThisMonth || 1) * 100) : 0; %>
+      <div class="badge <%= spendVsIncome <= 80 ? 'good' : spendVsIncome <= 100 ? 'neutral' : 'warn' %>"><%= spendVsIncome %>% spent</div>
+    </div>
+    <div class="tile">
+      <div class="icon"><span class="material-icons-round">receipt_long</span></div>
+      <div class="metric">
+        <div class="value"><%= cards.upcomingBills %></div>
+        <div class="label">Upcoming Bills</div>
+      </div>
+      <div class="badge neutral">Due by month-end</div>
+    </div>
+    <div class="tile">
+      <div class="icon"><span class="material-icons-round">category</span></div>
+      <div class="metric">
+        <div class="value"><%= cards.topCategory %></div>
+        <div class="label">Top Spending</div>
+      </div>
+      <div class="badge warn">Focus</div>
+    </div>
+  </section>
+
+  <section class="recent card reveal">
+    <div class="section-header">
+      <h3 class="section-title">Recent Transactions</h3>
+      <div class="section-actions">
+        <a class="btn btn-ghost" href="/transactions">View all</a>
+      </div>
+    </div>
+    <div class="carousel">
+      <div class="track">
+        <% recentTx.forEach(tx => { %>
+          <div class="item card tx-card">
+            <div class="head">
+              <span><%= (new Date(tx.date)).toLocaleDateString() %></span>
+              <% const amt = Math.abs(Number(tx.amount)); %>
+              <span class="amt <%= tx.type === 'EXPENSE' ? 'neg' : 'pos' %>"><%= tx.type === 'EXPENSE' ? '-' : '+' %><%= inr(amt) %></span>
+            </div>
+            <div><strong><%= tx.description %></strong></div>
+            <div class="muted"><%= tx.category ? tx.category.name : 'Uncategorized' %></div>
+          </div>
+        <% }) %>
+      </div>
+      <div class="nav">
+        <button type="button" aria-label="Prev" onclick="this.closest('.carousel').querySelector('.track').scrollBy({left:-320,behavior:'smooth'})"><span class="material-icons-round">chevron_left</span></button>
+        <button type="button" aria-label="Next" onclick="this.closest('.carousel').querySelector('.track').scrollBy({left:320,behavior:'smooth'})"><span class="material-icons-round">chevron_right</span></button>
+      </div>
+    </div>
+  </section>
+</main>
+<%- include('partials/_navBar') %>
+<script src="/js/dashboard.js"></script>
+<%- include('partials/_footer') %>

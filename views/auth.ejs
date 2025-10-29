@@ -1,0 +1,73 @@
+<%- include('partials/_head') %>
+<%- include('partials/_header') %>
+<main id="main" class="container auth page-enter" role="main">
+  <header class="auth-header reveal">
+    <h1 class="auth-title gradient-text"><%= mode === 'register' ? 'Create your account' : 'Welcome back' %></h1>
+    <p class="auth-sub muted"><%= mode === 'register' ? 'Join Pocket Guard to budget smarter and reach your goals.' : 'Log in to see your safe‑to‑spend and keep on track.' %></p>
+  </header>
+  <% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-error" role="alert" aria-live="assertive"><%= error %></div>
+  <% } %>
+  <% if (typeof success !== 'undefined' && success && mode === 'login') { %>
+    <div class="alert" role="status" aria-live="polite" style="background:#e8f5e9;color:#2e7d32;border-radius:12px;padding:8px"><%= success %></div>
+  <% } %>
+
+  <div class="auth-grid">
+    <form action="/<%= mode %>" method="post" class="card reveal auth-card" novalidate>
+      <label class="float">
+        <input id="email" type="email" name="email" required placeholder=" " autocomplete="email" inputmode="email" aria-label="Email">
+        <span>Email</span>
+      </label>
+      <% if (mode === 'register') { %>
+        <label class="float">
+          <input id="name" type="text" name="name" placeholder=" " autocomplete="name" aria-label="Name">
+          <span>Name</span>
+        </label>
+      <% } %>
+      <label class="float">
+        <input id="password" type="password" name="password" required placeholder=" " data-toggle="password" autocomplete="<%= mode === 'register' ? 'new-password' : 'current-password' %>" aria-label="Password">
+        <span>Password</span>
+      </label>
+
+      <% if (mode === 'login') { %>
+      <div class="toggle-line">
+        <label class="check"><input type="checkbox" name="remember"> <span>Remember me</span></label>
+        <a href="/forgot" class="muted">Forgot password?</a>
+      </div>
+      <% } %>
+
+      <% if (mode === 'register') { %>
+      <div class="toggle-line">
+        <span class="muted">Send me helpful tips</span>
+        <label class="switch">
+          <input type="checkbox" name="marketing" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <% } %>
+
+      <button class="btn btn-primary" type="submit"><%= mode === 'register' ? 'Create account' : 'Log in' %></button>
+      <p class="auth-switch muted">
+        <%= mode === 'register' ? 'Already have an account?' : "Don't have an account?" %>
+        <a href="/<%= mode === 'register' ? 'login' : 'register' %>"><%= mode === 'register' ? 'Log in' : 'Create one' %></a>
+      </p>
+    </form>
+
+    <aside class="card reveal auth-side">
+      <h3 class="muted">Why Pocket Guard?</h3>
+      <ul class="benefits">
+        <li><span class="material-icons-round">bolt</span> Track spending in real time</li>
+        <li><span class="material-icons-round">flag</span> Smart budgets and goals</li>
+        <li><span class="material-icons-round">chat</span> AI buddy for quick advice</li>
+      </ul>
+      <div class="alt-auth">
+        <button class="btn btn-ghost" type="button"><span class="material-icons-round">g_translate</span> Google</button>
+        <button class="btn btn-ghost" type="button"><span class="material-icons-round">apple</span> Apple</button>
+      </div>
+    </aside>
+  </div>
+
+  <p class="muted auth-trust"><span class="material-icons-round">shield</span> Your data is secured with 256‑bit encryption. We never share your personal information.</p>
+</main>
+<%- include('partials/_footer') %>
+

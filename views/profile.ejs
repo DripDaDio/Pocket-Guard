@@ -1,0 +1,104 @@
+<%- include('partials/_head') %>
+<%- include('partials/_header') %>
+<main class="container profile page-enter">
+  <div class="section-header">
+    <h1 class="section-title">Profile & Settings</h1>
+    <div class="section-actions">
+      <span class="badge info"><span class="material-icons-round">verified_user</span> Signed in</span>
+    </div>
+  </div>
+  <% if (typeof error !== 'undefined' && error) { %><div class="alert alert-error"><%= error %></div><% } %>
+  <% if (typeof success !== 'undefined' && success) { %><div class="alert alert-success"><%= success %></div><% } %>
+  <div class="two-col">
+    <section class="card reveal">
+      <div class="header">
+        <div class="avatar"><%= (user && user.name) ? user.name[0].toUpperCase() : 'U' %></div>
+        <div>
+          <div><strong><%= (user && user.name) ? user.name : '—' %></strong></div>
+          <div class="muted"><%= user ? user.email : '—' %></div>
+        </div>
+      </div>
+      <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+        <span class="chip"><span class="material-icons-round">calendar_today</span> Member</span>
+        <span class="chip"><span class="material-icons-round">notifications</span> Alerts <%= user && user.notifyWeekly ? 'On' : 'Off' %></span>
+      </div>
+    </section>
+
+    <section class="card reveal">
+      <div class="section-header"><h2 class="section-title">Linked Accounts</h2> <div class="section-actions"><a class="btn btn-primary" href="/accounts/new"><span class="material-icons-round">add</span> Link Account</a></div></div>
+      <% if ((accounts || []).length) { %>
+        <ul class="list">
+          <% accounts.forEach(a => { %>
+            <li class="list-item">
+              <div>
+                <div><strong><%= a.bankName %></strong> — <%= a.accountName %> (<%= a.type %>)</div>
+                <div class="meta"><%= a.last4 ? '•••• ' + a.last4 : '' %></div>
+              </div>
+              <form method="post" action="/accounts/<%= a.id %>/delete" onsubmit="return confirm('Delete this account? This will also remove its transactions.');">
+                <button class="btn btn-ghost" type="submit" aria-label="Delete <%= a.accountName %>">Delete</button>
+              </form>
+            </li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <div class="empty"><div class="icon"><span class="material-icons-round">account_balance</span></div>No linked accounts yet.</div>
+      <% } %>
+    </section>
+  </div>
+
+  <section class="card reveal">
+    <div class="section-header"><h2 class="section-title">Notifications</h2></div>
+    <form method="post" action="/profile/preferences">
+      <div class="toggle-line">
+        <span>Budget Overspend Alerts</span>
+        <label class="switch">
+          <input name="notifyOverspend" type="checkbox" <%= user && user.notifyOverspend ? 'checked' : '' %> />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-line">
+        <span>Upcoming Bill Reminders</span>
+        <label class="switch">
+          <input name="notifyBills" type="checkbox" <%= user && user.notifyBills ? 'checked' : '' %> />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-line">
+        <span>Weekly Spending Summary</span>
+        <label class="switch">
+          <input name="notifyWeekly" type="checkbox" <%= user && user.notifyWeekly ? 'checked' : '' %> />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-line">
+        <span>Goal Progress Updates</span>
+        <label class="switch">
+          <input name="notifyGoals" type="checkbox" <%= user && user.notifyGoals ? 'checked' : '' %> />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <button class="btn" type="submit">Save Preferences</button>
+    </form>
+  </section>
+  <section class="card reveal">
+    <div class="section-header"><h2 class="section-title">Security</h2> <div class="section-actions"><a class="btn btn-ghost" href="/forgot">Change Password</a></div></div>
+    <div class="toggle-line"><span>Biometric Authentication</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+    <div class="toggle-line"><span>PIN Protection</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+  </section>
+  <section class="card reveal">
+    <div class="section-header"><h2 class="section-title">Data Management</h2></div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <a class="btn" href="/export/transactions.csv">Export Transactions (CSV)</a>
+      <form method="post" action="/profile/delete" onsubmit="return confirm('Permanently delete your account? This cannot be undone.');">
+        <button class="btn btn-ghost" type="submit">Delete My Account</button>
+      </form>
+    </div>
+  </section>
+  <section class="card">
+    <h2>Legal</h2>
+    <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a>
+  </section>
+</main>
+<%- include('partials/_navBar') %>
+<script src="/js/profile.js"></script>
+<%- include('partials/_footer') %>

@@ -1,0 +1,79 @@
+<%- include('partials/_head') %>
+<%- include('partials/_header') %>
+<main class="container budgeting page-enter">
+  <div class="section-header">
+    <h1 class="section-title">Budgeting</h1>
+    <div class="section-actions">
+      <span class="badge info"><span class="material-icons-round">event</span> <%= (new Date()).toLocaleString('default', { month: 'long' }) %></span>
+    </div>
+  </div>
+  <div class="card reveal">
+    <div class="section-header">
+      <h3 class="section-title">Summary</h3>
+      <div class="section-actions">
+        <a class="btn btn-ghost" href="/transactions">View transactions</a>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="tile">
+        <div class="label muted">Total Budgeted</div>
+        <div class="value"><strong><%= inr(totalBudgeted) %></strong></div>
+      </div>
+      <div class="tile">
+        <div class="label muted">Total Spent</div>
+        <div class="value"><strong><%= inr(totalSpent) %></strong></div>
+      </div>
+      <div class="tile">
+        <div class="label muted">Remaining</div>
+        <div class="value"><strong><%= inr(totalRemaining) %></strong></div>
+      </div>
+    </div>
+  </div>
+  <section class="categories reveal">
+    <div class="section-header">
+      <h3 class="section-title">By Category</h3>
+      <div class="section-actions">
+        <div class="toolbar">
+          <input type="search" placeholder="Search categories" aria-label="Search categories">
+          <select aria-label="Filter">
+            <option value="all">All</option>
+            <option value="over">Over budget</option>
+            <option value="under">Under budget</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <% items.forEach(item => { %>
+      <div class="cat card reveal">
+        <div class="row">
+          <div class="name"><%= item.budget.category.name %></div>
+          <div class="spent"><%= inr(item.spent) %> / <%= inr(Number(item.budget.amount)) %></div>
+        </div>
+        <div class="progress"><div class="bar"><div class="fill" data-width="<%= item.utilization %>"></div></div></div>
+        <% if (item.ai) { %><div class="ai muted"><span class="material-icons-round" style="font-size:16px; vertical-align:middle; color: var(--brand-coral-dark);">lightbulb</span> <%= item.ai %></div><% } %>
+      </div>
+    <% }) %>
+  </section>
+  <section class="subs reveal">
+    <div class="section-header"><h2 class="section-title">Recurring Payments & Subscriptions</h2></div>
+    <div class="desc muted">Never miss a payment, never forget a subscription. I automatically track your recurring expenses.</div>
+    <ul class="list" style="margin-top:10px;">
+      <% subscriptions.forEach(s => { %>
+        <li class="list-item">
+          <div>
+            <div><strong><%= s.name %></strong> — <%= inr(Number(s.amount)) %></div>
+            <div class="meta">Next Due: <%= (new Date(s.dueDate)).toLocaleDateString() %></div>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <span class="badge <%= s.status.toLowerCase() === 'active' ? 'success' : 'neutral' %>"><%= s.status %></span>
+            <button class="btn btn-ghost" type="button" aria-label="Manage subscription">Manage</button>
+            <button class="btn" type="button" aria-label="Mark subscription as paid">Mark as Paid</button>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  </section>
+</main>
+<%- include('partials/_navBar') %>
+<script src="/js/budgeting.js"></script>
+<%- include('partials/_footer') %>

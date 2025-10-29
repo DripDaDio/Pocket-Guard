@@ -1,0 +1,19 @@
+<%- include('../partials/_head') %>
+<%- include('../partials/_header') %>
+<main class="container onboarding">
+  <h1>What Are Your Financial Dreams?</h1>
+  <p>Let's personalize your journey. Tell me what you're saving for, and I'll help you get there!</p>
+  <% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-error"><%= error %></div>
+  <% } %>
+  <form id="goals-form" action="/onboarding/set-goals" method="post" class="card">
+    <div id="goal-items"></div>
+    <input type="hidden" name="goals" id="goals-json" />
+    <div class="actions">
+      <button type="button" id="add-goal" class="btn">Add Another Goal</button>
+      <button type="submit" class="btn btn-primary">Finish Setup</button>
+    </div>
+  </form>
+</main>
+<script src="/js/onboarding.js"></script>
+<%- include('../partials/_footer') %>

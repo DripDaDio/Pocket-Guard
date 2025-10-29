@@ -1,0 +1,100 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Install deps and setup DB",
+			"type": "shell",
+			"command": "npm install && export DATABASE_URL=\"file:./dev.db\" && npm run prisma:generate && npm run db:push && npm run db:seed",
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Prisma generate/push/seed retry",
+			"type": "shell",
+			"command": "export DATABASE_URL=\"file:./dev.db\" && npm run prisma:generate && npm run db:push && npm run db:seed",
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Start dev server",
+			"type": "shell",
+			"command": "export DATABASE_URL=\"file:./dev.db\" && npm run dev",
+			"isBackground": true,
+			"group": "build"
+		},
+		{
+			"label": "Start dev server",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"dev"
+			],
+			"isBackground": true,
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Restart dev server",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"dev"
+			],
+			"isBackground": true,
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build CSS",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"css:build"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Rebuild CSS",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"css:build"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build CSS with darker coral",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"css:build"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		}
+	]
+}

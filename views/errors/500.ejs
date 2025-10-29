@@ -1,0 +1,10 @@
+<%- include('../partials/_head') %>
+<%- include('../partials/_header') %>
+<main class="container">
+  <h1>Something went wrong</h1>
+  <p>We're on it. Please try again later.</p>
+  <% if (typeof error !== 'undefined' && error) { %>
+    <pre style="white-space:pre-wrap;background:#fff;border:1px solid #eee;border-radius:12px;padding:12px;overflow:auto"><%= error.stack || error.message || error %></pre>
+  <% } %>
+</main>
+<%- include('../partials/_footer') %>

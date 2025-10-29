@@ -1,0 +1,17 @@
+<nav class="pg-bottom-nav" role="navigation" aria-label="Primary">
+  <a href="/dashboard" class="nav-item <%= path.startsWith('/dashboard') ? 'active' : '' %>">
+    <span class="material-icons-round">space_dashboard</span><span>Dashboard</span>
+  </a>
+  <a href="/budgeting" class="nav-item <%= path.startsWith('/budgeting') ? 'active' : '' %>">
+    <span class="material-icons-round">stacked_bar_chart</span><span>Budgeting</span>
+  </a>
+  <a href="/goals" class="nav-item <%= path.startsWith('/goals') ? 'active' : '' %>">
+    <span class="material-icons-round">flag_circle</span><span>Goals</span>
+  </a>
+  <a href="/buddy" class="nav-item <%= path.startsWith('/buddy') ? 'active' : '' %>">
+    <span class="material-icons-round">smart_toy</span><span>AI Buddy</span>
+  </a>
+  <a href="/profile" class="nav-item <%= path.startsWith('/profile') ? 'active' : '' %>">
+    <span class="material-icons-round">settings</span><span>Profile</span>
+  </a>
+</nav>

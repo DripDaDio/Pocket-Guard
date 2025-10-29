@@ -1,0 +1,40 @@
+<%- include('partials/_head') %>
+<%- include('partials/_header') %>
+<main class="container buddy page-enter">
+  <div class="section-header">
+    <h1 class="section-title">Your Finance Buddy</h1>
+    <div class="section-actions">
+      <% if (typeof geminiActive !== 'undefined' && geminiActive) { %>
+        <span class="badge success"><span class="material-icons-round">bolt</span> Active</span>
+      <% } else { %>
+        <span class="badge"><span class="material-icons-round">bolt</span> Offline</span>
+      <% } %>
+      <button id="buddy-reset" class="btn" style="margin-left:8px">New chat</button>
+    </div>
+  </div>
+  <section class="health card reveal">
+    <div class="score">78</div>
+    <div class="feedback">Good! You're making smart choices.</div>
+  </section>
+  <section class="chat card reveal">
+    <div class="chat-header">
+      <div class="title"><div class="ai-avatar"><span class="material-icons-round">smart_toy</span></div> Buddy</div>
+      <span class="typing" hidden>typing…</span>
+    </div>
+    <div id="chat-log" class="chat-log">
+      <!-- Chat starts empty; messages will appear here -->
+    </div>
+    <form id="chat-form" class="chat-input">
+      <input id="chat-text" placeholder="Ask Your Buddy..." autocomplete="off" />
+      <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+  </section>
+  <section class="learning reveal">
+    <div class="card">What is an ETF?</div>
+    <div class="card">Understanding Credit Scores</div>
+    <div class="card">Build an Emergency Fund</div>
+  </section>
+</main>
+<%- include('partials/_navBar') %>
+<script src="/js/buddy.js"></script>
+<%- include('partials/_footer') %>

@@ -1,0 +1,46 @@
+<%- include('../partials/_head') %>
+<%- include('../partials/_header') %>
+<main class="container page-enter">
+  <h1>Link a Bank Account (Prototype)</h1>
+  <% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-error"><%= error %></div>
+  <% } %>
+  <form method="post" action="/accounts" class="card reveal" style="max-width:520px">
+    <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px">
+      <label class="float"><input type="text" name="bankName" placeholder=" " value="Mock Bank"><span>Bank Name</span></label>
+      <label class="float"><input type="text" name="accountName" placeholder=" " value="Everyday Checking"><span>Account Name</span></label>
+      <label class="float"><select name="type"><option value="CHECKING">Checking</option><option value="SAVINGS">Savings</option><option value="CREDIT">Credit Card</option></select><span>Type</span></label>
+      <label class="float"><input type="text" name="last4" maxlength="4" placeholder=" " value="1234"><span>Last 4 digits</span></label>
+      <label class="float"><input type="number" name="currentBalance" step="0.01" placeholder=" " value="2500"><span>Current Balance</span></label>
+    </div>
+    <div class="toggle-line" style="margin-top:8px">
+      <span class="muted">Also add sample transactions</span>
+      <label class="switch">
+        <input type="checkbox" name="generateTx" checked />
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="toggle-line">
+      <button class="btn" type="button" id="randomize">Randomize</button>
+      <span class="muted">Quickly generate sample details</span>
+    </div>
+    <button class="btn btn-primary" type="submit">Link Account</button>
+    <a class="btn btn-ghost" href="/profile">Cancel</a>
+  </form>
+</main>
+<script>
+  document.getElementById('randomize').addEventListener('click', () => {
+    const banks = ['Mock Bank','Acme Bank','Union Trust','Metro Finance'];
+    const names = ['Everyday Checking','High-Yield Savings','Rewards Card','Travel Card'];
+    const pick = a => a[Math.floor(Math.random()*a.length)];
+    const typeEl = document.querySelector('select[name="type"]');
+    const t = ['CHECKING','SAVINGS','CREDIT'][Math.floor(Math.random()*3)];
+    document.querySelector('input[name="bankName"]').value = pick(banks);
+    document.querySelector('input[name="accountName"]').value = pick(names);
+    typeEl.value = t;
+    document.querySelector('input[name="last4"]').value = String(Math.floor(1000 + Math.random()*9000));
+    const bal = t === 'CREDIT' ? -(Math.random()*2000).toFixed(2) : (Math.random()*5000).toFixed(2);
+    document.querySelector('input[name="currentBalance"]').value = bal;
+  });
+</script>
+<%- include('../partials/_footer') %>

@@ -1,0 +1,75 @@
+<%- include('partials/_head') %>
+<%- include('partials/_header') %>
+<main class="container goals page-enter">
+  <div class="section-header">
+    <h1 class="section-title">My Goals</h1>
+    <form class="create" action="/goals/create" method="post" style="display:flex; gap:8px; flex-wrap:wrap;">
+      <input name="name" placeholder="Goal name" required>
+      <input name="targetAmount" type="number" step="0.01" placeholder="Target amount" required>
+      <input name="targetDate" type="date" aria-label="Target date">
+      <button class="btn btn-primary" type="submit">Create New Goal</button>
+    </form>
+  </div>
+  <section class="goal-cards reveal">
+    <% goals.forEach(g => { const progress = Math.min(100, Math.round((Number(g.savedAmount)/Number(g.targetAmount))*100)); %>
+      <div class="goal card" data-id="<%= g.id %>">
+        <div class="section-header">
+          <div class="title"><strong><%= g.name %></strong></div>
+          <div class="section-actions">
+            <span class="badge info"><%= progress %>%</span>
+          </div>
+        </div>
+        <div class="progress"> <div class="bar"><div class="fill" data-width="<%= progress %>"></div></div></div>
+        <div class="stats muted"><%= progress %>% • <%= inr(Number(g.savedAmount)) %> / <%= inr(Number(g.targetAmount)) %></div>
+        <form class="add-funds" action="#" method="post" style="display:flex; gap:8px; margin-top:8px;">
+          <input name="amount" type="number" step="0.01" min="0" placeholder="Add funds">
+          <button class="btn" type="submit">Add Funds</button>
+        </form>
+      </div>
+    <% }) %>
+  </section>
+
+  <section class="debt card reveal">
+    <div class="section-header"><h2 class="section-title">Tackle Your Debt, Faster & Smarter</h2></div>
+    <div class="muted">(Simulated) Add your debts to see payoff strategies.</div>
+    <div class="debt-grid grid">
+      <div class="tile">
+        <div class="label">Credit Card</div>
+        <div class="value"><%= inr(1200) %> balance • 35% paid</div>
+        <div class="progress"><div class="bar"><div class="fill" data-width="35"></div></div></div>
+  <div class="muted">AI Buddy suggests: Paying an extra <%= inr(25) %>/mo saves <%= inr(110) %> interest.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sprints card reveal">
+    <div class="section-header"><h2 class="section-title">Automated Savings Sprints</h2></div>
+    <div class="grid">
+      <div class="tile">
+        <div><strong>Guilty Pleasure Rule</strong></div>
+        <div class="muted">Every time I buy coffee, transfer $1 to "Vacation".</div>
+        <label><input type="checkbox" checked> Enabled</label>
+      </div>
+      <div class="tile">
+        <div><strong>Steps Streak</strong></div>
+        <div class="muted">If I walk 10k steps, save $2 to "Emergency Fund".</div>
+        <label><input type="checkbox"> Enabled</label>
+      </div>
+    </div>
+    <button class="btn">Create New Sprint</button>
+  </section>
+
+  <section class="roundups card reveal">
+    <div class="section-header"><h2 class="section-title">Spare Change Investing</h2></div>
+    <div>Round-ups ON. You've invested <%= inr(24.18) %> this month!</div>
+    <div class="muted">AI Buddy reports: Your spare change portfolio grew by 5% this quarter!</div>
+    <div class="pig">🐷</div>
+    <div class="actions">
+      <button class="btn">Manage Investments</button>
+      <button class="btn btn-ghost">Learn More</button>
+    </div>
+  </section>
+</main>
+<%- include('partials/_navBar') %>
+<script src="/js/goals.js"></script>
+<%- include('partials/_footer') %>

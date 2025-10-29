@@ -1,0 +1,19 @@
+<%- include('partials/_head') %>
+<%- include('partials/_header') %>
+<main class="container page-enter">
+  <div class="section-header">
+    <h1 class="section-title">Forgot Password</h1>
+  </div>
+  <% if (error) { %><div class="alert alert-error"><%= error %></div><% } %>
+  <% if (sent) { %>
+  <div class="card reveal">
+      <p>We've generated a reset link. In production we'd email it to you. For now, click below:</p>
+      <p><a class="btn btn-primary" href="<%= sent %>">Reset your password</a></p>
+    </div>
+  <% } %>
+  <form action="/forgot" method="post" class="card reveal" style="max-width:420px">
+    <label class="float"><input type="email" name="email" required placeholder=" "><span>Email</span></label>
+    <button class="btn btn-primary" type="submit">Send reset link</button>
+  </form>
+</main>
+<%- include('partials/_footer') %>

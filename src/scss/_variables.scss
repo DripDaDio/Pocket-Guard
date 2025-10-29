@@ -1,0 +1,16 @@
+$primary: rgba(230, 109, 87, 1); // darker coral primary
+$secondary: rgba(255, 224, 191, 1); // peach secondary
+$accent: rgba(255, 224, 191, 1); // keep peach as accent
+$accent2: rgba(230, 109, 87, 1); // darker coral as second accent
+$bg: #F8F8F8; // background-light
+$text: #333333; // text-primary
+$text2: #666666; // text-secondary
+$muted: #777; // utility muted
+$disabled: #CCCCCC; // text-disabled
+$card: #FFFFFF; // background-card
+$border: #E0E0E0; // border-color
+$error: #E53935; // keep red for errors
+$success: $secondary;
+$warning: $accent;
+$radius: 14px;
+$shadow: 0 8px 24px rgba(0,0,0,0.08);

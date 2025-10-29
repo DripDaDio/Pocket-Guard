@@ -1,0 +1,191 @@
+<%- include('partials/_head') %>
+<%- include('partials/_header') %>
+<main id="main" class="container welcome page-enter" role="main">
+  <!-- Hero with subtle background and a Welcome headline -->
+  <section class="hero reveal" aria-label="Welcome">
+    <div class="bg" aria-hidden="true">
+      <span class="shape circle s1"></span>
+      <span class="shape circle s2"></span>
+      <span class="shape triangle s3"></span>
+      <span class="shape circle s4"></span>
+      <span class="shape triangle s5"></span>
+      <span class="shape circle s6"></span>
+    </div>
+    <div class="hero-content">
+      <div class="eyebrow">Welcome</div>
+      <h1 class="hero-title gradient-text">Pocket Guard — Money, made simple.</h1>
+      <p class="hero-sub">Your friendly AI copilot that keeps budgets on track, shows what’s safe to spend, and helps you reach goals without stress.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary btn-cta" href="/register">Get Started</a>
+        <a class="btn btn-ghost" href="#overview">Overview</a>
+      </div>
+      <div class="trust-bar" role="status" aria-label="Trust and Security">
+        <span class="material-icons-round" aria-hidden="true">shield</span>
+        <span>Bank‑level encryption</span>
+        <span class="sep" aria-hidden="true">•</span>
+        <span class="material-icons-round" aria-hidden="true">verified_user</span>
+        <span>Your data, your control</span>
+      </div>
+  <button class="scroll-cue" type="button" aria-label="Scroll to overview" data-scroll-to="#overview"><span class="material-icons-round">expand_more</span></button>
+    </div>
+  </section>
+
+  <!-- Sticky in-page nav for large screens -->
+  <nav class="subnav reveal" aria-label="Sections">
+    <a href="#overview">Overview</a>
+    <a href="#project">Project</a>
+    <a href="#team">Our Team</a>
+  </nav>
+
+  <!-- Feature highlights -->
+  <section class="section card reveal" data-stagger aria-label="Highlights" style="text-align:center">
+    <h2>Why Pocket Guard</h2>
+    <div class="grid" style="margin-top:8px">
+      <article class="tile card" style="border:1px solid #E0E0E0">
+        <div class="icon"><span class="material-icons-round">account_balance_wallet</span></div>
+        <h3 style="margin:6px 0">Know Your Safe to Spend</h3>
+        <p class="muted">Real-time view of what’s comfortable after bills and savings.</p>
+      </article>
+      <article class="tile card" style="border:1px solid #E0E0E0">
+        <div class="icon"><span class="material-icons-round">track_changes</span></div>
+        <h3 style="margin:6px 0">Hit Your Goals Faster</h3>
+        <p class="muted">Plan, track, and get friendly nudges toward your targets.</p>
+      </article>
+      <article class="tile card" style="border:1px solid #E0E0E0">
+        <div class="icon"><span class="material-icons-round">event_available</span></div>
+        <h3 style="margin:6px 0">Never Miss a Beat</h3>
+        <p class="muted">Stay ahead of bills and subscriptions with helpful reminders.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Overview section -->
+  <section id="overview" class="section card reveal" aria-label="Overview">
+    <h2>Overview</h2>
+    <div class="prose">
+      <div class="callout brand">
+        <div class="callout-title"><span class="material-icons-round" aria-hidden="true">sparkles</span> What is Pocket Guard?</div>
+        <p>Pocket Guard is a calm money companion that shows what’s safe to spend after your bills, savings and goals are covered—so you can make decisions with confidence.</p>
+      </div>
+
+      <div class="chip-row">
+        <span class="chip"><span class="material-icons-round">account_balance_wallet</span> Safe‑to‑Spend</span>
+        <span class="chip"><span class="material-icons-round">category</span> Adaptive Budgets</span>
+        <span class="chip"><span class="material-icons-round">flag</span> Goals & Milestones</span>
+        <span class="chip"><span class="material-icons-round">timelapse</span> Cashflow Clarity</span>
+        <span class="chip"><span class="material-icons-round">subscriptions</span> Subscriptions</span>
+        <span class="chip"><span class="material-icons-round">notifications</span> Gentle Nudges</span>
+        <span class="chip"><span class="material-icons-round">shield</span> Privacy‑first</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project details -->
+  <section id="project" class="section card reveal" aria-label="Project">
+    <h2>The Project</h2>
+    <div class="prose">
+      <div class="split-cards">
+        <div class="card soft problem">
+          <div class="eyebrow">The problem</div>
+          <p>Managing money is stressful when apps are noisy or unclear. People just want to know: “What can I safely spend today and still hit my goals?”</p>
+        </div>
+        <div class="card soft approach">
+          <div class="eyebrow">Our approach</div>
+          <p>Keep the signal high and the noise low. A clean UI, reliable math, and gentle guidance—nothing overwhelming.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="step"><span class="dot"></span><div class="content"><strong>Connect or add</strong><br/>Link accounts or add transactions manually.</div></div>
+        <div class="step"><span class="dot"></span><div class="content"><strong>Set the plan</strong><br/>Income, fixed bills, categories, and goals.</div></div>
+        <div class="step"><span class="dot"></span><div class="content"><strong>See Safe‑to‑Spend</strong><br/>We compute your cushion and keep it updated.</div></div>
+      </div>
+
+      <div class="accordion" role="tablist">
+        <div class="acc-item">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-core" id="acc-core-btn">
+            <span class="material-icons-round" aria-hidden="true">apps</span>
+            Core capabilities
+            <span class="material-icons-round chevron" aria-hidden="true">expand_more</span>
+          </button>
+          <div id="acc-core" class="acc-panel" role="region" aria-labelledby="acc-core-btn">
+            <ul>
+              <li>Safe‑to‑Spend that factors income, bills, goals, and planned budgets.</li>
+              <li>Budgets with rollovers, trends, and category insights.</li>
+              <li>Goals with progress tracking and auto contribution suggestions.</li>
+              <li>Subscriptions and bill reminders—no surprise renewals.</li>
+              <li>Buddy chat for shared motivation and accountability.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-tech" id="acc-tech-btn">
+            <span class="material-icons-round" aria-hidden="true">architecture</span>
+            Tech & architecture
+            <span class="material-icons-round chevron" aria-hidden="true">expand_more</span>
+          </button>
+          <div id="acc-tech" class="acc-panel" role="region" aria-labelledby="acc-tech-btn">
+            <ul>
+              <li>Node.js + Express with EJS server‑rendered pages.</li>
+              <li>Prisma ORM with SQLite for local/portable dev.</li>
+              <li>Session auth, secure cookies, date/currency helpers.</li>
+              <li>Brand tokens, subtle motion, accessible dark mode.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc-roadmap" id="acc-roadmap-btn">
+            <span class="material-icons-round" aria-hidden="true">route</span>
+            Roadmap
+            <span class="material-icons-round chevron" aria-hidden="true">expand_more</span>
+          </button>
+          <div id="acc-roadmap" class="acc-panel" role="region" aria-labelledby="acc-roadmap-btn">
+            <ul>
+              <li>Deeper insights (forecasts, anomaly detection).</li>
+              <li>Bank connections and richer categorization.</li>
+              <li>Shared goals and household budgeting.</li>
+              <li>Mobile‑first and offline‑friendly tweaks.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team section (populate from PDF) -->
+  <section id="team" class="section card reveal" aria-label="Our Team">
+    <h2>Our Team</h2>
+    <div class="team">
+      <article class="member">
+        <div class="avatar" aria-hidden="true">MM</div>
+        <div class="meta">
+          <strong>Mohit Kumar Mishra</strong>
+          <div class="muted">Frontend</div>
+        </div>
+      </article>
+      <article class="member">
+        <div class="avatar" aria-hidden="true">YA</div>
+        <div class="meta">
+          <strong>Yash Aswal</strong>
+          <div class="muted">Backend</div>
+        </div>
+      </article>
+      <article class="member">
+        <div class="avatar" aria-hidden="true">KA</div>
+        <div class="meta">
+          <strong>Kush Ahuja</strong>
+          <div class="muted">Backend</div>
+        </div>
+      </article>
+      <article class="member">
+        <div class="avatar" aria-hidden="true">SC</div>
+        <div class="meta">
+          <strong>Suryansh Chuadhary</strong>
+          <div class="muted">Marketing</div>
+        </div>
+      </article>
+    </div>
+  </section>
+  
+</main>
+<%- include('partials/_footer') %>

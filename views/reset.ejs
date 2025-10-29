@@ -1,0 +1,13 @@
+<%- include('partials/_head') %>
+<%- include('partials/_header') %>
+<main class="container page-enter">
+  <div class="section-header">
+    <h1 class="section-title">Reset Password</h1>
+  </div>
+  <% if (error) { %><div class="alert alert-error"><%= error %></div><% } %>
+  <form action="/reset/<%= token %>" method="post" class="card reveal" style="max-width:420px">
+  <label class="float"><input type="password" name="password" required placeholder=" " data-toggle="password"><span>New Password</span></label>
+    <button class="btn btn-primary" type="submit">Update Password</button>
+  </form>
+</main>
+<%- include('partials/_footer') %>
