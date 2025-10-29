@@ -1,3 +1,5 @@
 .DS_Store
 .vercel
 .cache
+node_modules
+.env
